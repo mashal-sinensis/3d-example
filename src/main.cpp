@@ -82,7 +82,12 @@ int main()
 	
 	// Make the window's context current
 	glfwMakeContextCurrent(window);
-	gladLoadGL(); // gladLoadGL(glfwGetProcAddress);
+	
+	if (!gladLoadGL())
+	{
+		return -1;
+	}
+	
 	glfwSwapInterval(1);
 
 	// Missing OpenGL error checks
@@ -95,7 +100,6 @@ int main()
 	const GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
 	glCompileShader(vertex_shader);
-
 
 	const GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment_shader, 1, &fragment_shader_text, NULL);
